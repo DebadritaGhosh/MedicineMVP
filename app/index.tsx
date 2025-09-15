@@ -1,15 +1,13 @@
-import { Text, View } from "react-native";
+import LoginScreen from "./auth/login";
 
 export default function Index() {
+  // useEffect(() => {
+  //   router.replace("/auth/login");
+  // }, []);
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+
+      <LoginScreen />
+      
   );
 }
