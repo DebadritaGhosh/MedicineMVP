@@ -1,50 +1,144 @@
-# Welcome to your Expo app 👋
+# Medicine Ordering App (MVP)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a simple yet fully functional **Medicine Ordering App** built with **React Native**. The app allows users to browse medicines, add them to their cart, checkout, and view their order history. It provides essential features like user authentication, a medicine list with search & filter, a cart system, and order tracking—all stored locally.
 
-## Get started
+### 📝 **Note**:
 
-1. Install dependencies
+This **app was created as part of an assignment** to demonstrate my skills in **React Native** development. It's a Minimum Viable Product (MVP) and is intended to showcase core functionalities like authentication, cart management, and order history. The project doesn't involve backend integration as the user data and order information are stored locally using **AsyncStorage** or **SQLite**.
+
+## 📲 Features
+
+1. **Authentication**
+
+   * User can **Sign Up** and **Login**.
+   * Basic validation for email format and password (min. 6 chars).
+   * User info is stored locally (using AsyncStorage).
+
+2. **Medicine List**
+
+   * Display medicine details like **name**, **price**, and **image**.
+   * Users can **search** and **filter** medicines by category.
+
+3. **Cart & Checkout**
+
+   * Users can **add** or **remove** items from the cart.
+   * Shows **total price** of items in the cart.
+   * On checkout, the order is saved to local storage and the cart is cleared.
+
+4. **Order History**
+
+   * Users can view their **previous orders** with details such as items, total amount, and date.
+
+5. **Responsive UI**
+
+   * Clean and responsive design with **Expo Navigation** (Tab + Stack navigation).
+   * Supports **FlatList** for rendering large lists of medicines.
+
+## ⚙️ Technical Features
+
+* **React Native Expo**.
+* Functional components using **React Hooks**.
+* **State Management**: Context API .
+* **Persistence**: User data and orders are stored locally using **AsyncStorage**.
+* **Responsive UI** using **Expo Navigation**.
+
+### Libraries Used
+
+* AsyncStorage (for persistence)
+* lucide-react-native (for icons)
+
+## 🚀 How to Run the App
+
+### Prerequisites
+
+1. Ensure you have **Node.js** installed (v20.19+).
+2. Make sure you have **Android Studio** or **Xcode** for device emulation.
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/DebadritaGhosh/MedicineMVP.git
+   cd MedicineMVP
+   ```
+
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Run the app:
 
-   ```bash
-   npx expo start
-   ```
+   * **For iOS**:
 
-In the output, you'll find options to open the app in a
+     ```bash
+     npx expo start --ios
+     ```
+   * **For Android**:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+     ```bash
+     npx expo start --ios
+     ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+4. Open the app on your emulator or device!
 
-## Get a fresh project
+## 🖼️ App Screenshots
 
-When you're ready, run:
+Here are some screenshots of the app in action:
 
-```bash
-npm run reset-project
-```
+* **Sign In Screen**
+  ![signin.png](app_screenshots/signin.png)
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+* **Sign Up Screen**
+  ![signup.png](app_screenshots/signup.png)
 
-## Learn more
+* **Cart Screen**
+  ![cart.png](app_screenshots/cart.png)
 
-To learn more about developing your project with Expo, look at the following resources:
+* **Profile Screen**
+  ![profile.png](app_screenshots/profile.png)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+* **Order History Screen**
+  ![history.png](app_screenshots/history.png)
 
-## Join the community
+* **Home Screen (Medicine List)**
+  ![home.png](app_screenshots/home.png)
 
-Join our community of developers creating universal apps.
+## 🔧 Setup and Customization
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+If you want to set up the project locally or make changes, you can follow these steps:
+
+1. Fork or clone the repository.
+2. Install dependencies using `npm install`.
+3. Run the app with `npx expo start`.
+4. Customize or extend features as needed!
+
+## 📖 Documentation
+
+* **Login/Signup**: Handles user authentication.
+* **Medicine List**: Displays all available medicines with search & filter functionality.
+* **Cart**: Manage medicines in the shopping cart.
+* **Order History**: View past orders and their details.
+* **Profile**: Basic user information.
+
+## 💡 Bonus Features (Optional)
+
+* TypeScript support for better type safety.
+
+## 🛠️ Libraries Used
+
+* `lucide-react-native` for icons.
+* `@react-native-async-storage/async-storage` for data persistence.
+
+## 📅 Timeline
+
+* Completed the MVP in **48 hours** as per the assignment requirements.
+
+---
+
+### Notes:
+
+* If you encounter any issues while running the app, feel free to open an issue in the GitHub repo.
+* If you're interested in contributing or have any suggestions, don't hesitate to reach out!
