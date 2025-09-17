@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 interface User {
   id: string;
@@ -13,6 +13,8 @@ interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   signup: (name: string, email: string, password: string) => Promise<boolean>;
+  logout: () => Promise<void>;
+  updateUser: (updates: Partial<User>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -21,6 +23,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const loadUser = async () => {
+    try {
+      const userData = await AsyncStorage.getItem('currentUser');
+      if (userData) {
+        setUser(JSON.parse(userData));
+      }
+    } catch (error) {
+      console.error('Error loading user:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
@@ -92,11 +110,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem('currentUser');
+      setUser(null);
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
+  const updateUser = async (updates: Partial<User>) => {
+    try {
+      if (!user) return;
+
+      const updatedUser = { ...user, ...updates };
+      
+      // Update current user
+      await AsyncStorage.setItem('currentUser', JSON.stringify(updatedUser));
+      setUser(updatedUser);
+
+      // Update in users array
+      const usersData = await AsyncStorage.getItem('users');
+      const users = usersData ? JSON.parse(usersData) : [];
+      const userIndex = users.findIndex((u: any) => u.id === user.id);
+      
+      if (userIndex !== -1) {
+        users[userIndex] = { ...users[userIndex], ...updates };
+        await AsyncStorage.setItem('users', JSON.stringify(users));
+      }
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
+
   const value: AuthContextType = {
     user,
     loading,
     login,
     signup,
+    logout,
+    updateUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

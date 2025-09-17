@@ -1,7 +1,11 @@
+
+import { useCart } from '@/context/CartContext';
 import { Tabs } from 'expo-router';
 import { FileText, Pill, ShoppingCart, User } from 'lucide-react-native';
 
 export default function TabLayout() {
+  const { items } = useCart();
+  const cartItemsCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <Tabs
@@ -39,6 +43,7 @@ export default function TabLayout() {
           tabBarIcon: ({ size, color }) => (
             <ShoppingCart size={size} color={color} />
           ),
+          tabBarBadge: cartItemsCount > 0 ? cartItemsCount : undefined,
         }}
       />
       <Tabs.Screen

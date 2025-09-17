@@ -1,4 +1,5 @@
-import { Link } from 'expo-router';
+import { useAuth } from '@/context/AuthContext';
+import { Link, router } from 'expo-router';
 import { Eye, EyeOff, Lock, Mail, User } from 'lucide-react-native';
 import React, { useState } from 'react';
 import {
@@ -22,6 +23,7 @@ export default function SignupScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { signup } = useAuth();
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -51,9 +53,15 @@ export default function SignupScreen() {
 
     setLoading(true);
     try {
-      // TODO : signup with Functionality
+      const success = await signup(name.trim(), email.trim().toLowerCase(), password);
+      if (success) {
+        Alert.alert('Success', 'Account created successfully!', [
+          { text: 'OK', onPress: () => router.replace('/(tabs)') }
+        ]);
+      } else {
+        Alert.alert('Error', 'Email already exists. Please use a different email.');
+      }
     } catch (error) {
-      console.log(error);
       Alert.alert('Error', 'Registration failed. Please try again.');
     } finally {
       setLoading(false);
